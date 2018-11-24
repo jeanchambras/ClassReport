@@ -39,3 +39,19 @@ html, body
     margin-bottom: 20px
     margin-top: 20px
 
+.fullscreen-overlay-center
+    position: absolute
+    width: 100vw
+    height: 100vh
+    display: flex
+    align-items: center
+    justify-content: center
+    pointer-events: none
+
+.emoji
+    transform: scale(0)
+    transition: all 0.7s cubic-bezier(.17,-.4,.89,.4)
+
+    &.active
+        transform: scale(1)
+        transition: all 0.7s cubic-bezier(.87,.4,.19,2.14)
