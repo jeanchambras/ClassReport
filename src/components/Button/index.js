@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 class Button extends Component {
 
     render() {
-        const { onClick, label, style } = this.props;
+        const { onClick, children, style } = this.props;
         return (
-            <a onClick={onClick}>
+            <a onClick={ onClick }>
                 <div style={ style }>
-                    <span>{ label }</span>
+                    { children }
                 </div>
             </a>
         );
