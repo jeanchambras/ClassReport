@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import getHeads from '../../api/heads';
+import getImageInfos from '../../api';
 
 import VideoFeed from '../../components/VideoFeed';
 
 class DashboardScreen extends Component {
 
     onGotPicture = (blob) => {
-        getHeads(blob).then(console.log).catch(console.error);
+        getImageInfos(blob).then(console.log).catch(console.error);
     }
 
     render() {
