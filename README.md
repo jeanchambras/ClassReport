@@ -40,6 +40,7 @@ Start the __server__ project in an other window with:
 
 ```sh
 cd server
+./getModels.sh
 pip install -r requirements.txt
 python server.py
 ```
