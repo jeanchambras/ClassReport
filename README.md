@@ -27,16 +27,7 @@ export default {
 
 ### Launch the project
 
-
-Start the __application__ project with:
-
-```sh
-cd client
-yarn
-yarn start
-```
-
-Start the __server__ project in an other window with:
+Start the __server__ project with:
 
 ```sh
 cd server
@@ -44,6 +35,16 @@ cd server
 pip install -r requirements.txt
 python server.py
 ```
+
+Start the __application__ project in an other window with:
+
+```sh
+cd client
+yarn
+yarn start
+```
+
+
 
 ## Motivations
 The goal was to create a very **intuitive dashboard** in the time available where a speaker (teacher, speaker, etc.) could understand and be informed of the **audience's interactions**. They are categorized into two categories:
