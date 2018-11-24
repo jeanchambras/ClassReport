@@ -22,22 +22,38 @@ const params = {
         'emotion,hair,makeup,occlusion,accessories,blur,exposure,noise'
 };
 
-const options = {
-    uri: uriBase,
-    qs: params,
-    body: '{"url": ' + '"' + imageUrl + '"}',
-    headers: {
-        'Content-Type': 'application/json',
-        'Ocp-Apim-Subscription-Key' : subscriptionKey
-    }
-};
 
-request.post(options, (error, response, body) => {
-  if (error) {
-    console.log('Error: ', error);
-    return;
-  }
-  let jsonResponse = JSON.stringify(JSON.parse(body), null, '  ');
-  console.log('JSON Response\n');
-  console.log(jsonResponse);
+// get Head counts from input image
+
+module.exports.getHeads = (image) => {
+
+  // Set options for api request
+  const options = {
+      uri: uriBase,
+      qs: params,
+      body: image,
+      headers: {
+          'Content-Type': 'application/octet-stream',
+          'Ocp-Apim-Subscription-Key' : subscriptionKey
+      }
+  };
+
+  // Post image to Microsoft Azure
+
+const promise = new Promise((resolve, reject) => {
+  request.post(options, (error, response, body) => {
+      if (error) {
+        console.log('Error: ', error);
+        return;
+      }
+
+      let jsonResponse = JSON.stringify(JSON.parse(body), null, '  ');
+      console.log('Response: \n');
+      console.log(jsonResponse);
+      resolve(jsonResponse.length);
+    });
 });
+
+  return promise;
+
+};

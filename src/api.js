@@ -1,19 +1,12 @@
-const getImageInfos = (image) => {
+const getHeads = require('./api/heads').getHeads;
 
+module.exports.getImageInfos = (image) => {
 
+return getHeads(image).then(console.log);
 
 }
-
-export { getImageInfos }
-
 
 
 const getHands = (image) => {
-
-
-}
-
-
-const getHead = (image) =>{
 
 }

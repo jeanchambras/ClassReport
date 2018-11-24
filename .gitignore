@@ -5,6 +5,8 @@
 ### API keys ###
 ./src/api/keys.js
 
+### Test images ###
+./image_test.jpg
 
 ### macOS ###
 # General
