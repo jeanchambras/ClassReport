@@ -11,7 +11,7 @@ class StartScreen extends Component {
     render() {
         const { onStart } = this.props;
         return (
-            <div class={"empty" /* fullscreen flex centered */}>
+            <div className={"empty" /* fullscreen flex centered */}>
                 <Button onClick={ onStart }>
                     Start
                 </Button>
