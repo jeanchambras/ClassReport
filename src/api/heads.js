@@ -1,6 +1,8 @@
 import request from 'request';
 import keys from './keys';
 
+const uri = 'https://northeurope.api.cognitive.microsoft.com/face/v1.0/detect';
+
 const params = {
     'returnFaceId': 'true',
     'returnFaceLandmarks': 'false',
@@ -8,31 +10,20 @@ const params = {
         'emotion,hair,makeup,occlusion,accessories,blur,exposure,noise'
 };
 
-const getHeads = (image) => {
-    
-    console.log(image);
+const urlParams = Object.entries(params).map(e => e.join('=')).join('&');
 
-    const options = {
-        uri: 'https://northeurope.api.cognitive.microsoft.com/face/v1.0/detect',
-        qs: params,
-        data: image,
+const getHeads = (imageBlob) => {
+    
+    return fetch(`${uri}?${urlParams}`, {
+        method: 'POST',
+        body: imageBlob,
+        processData: false,
+        contentType: false,
         headers: {
             'Content-Type': 'application/octet-stream',
             'Ocp-Apim-Subscription-Key': keys.azure
         }
-    };
-
-    const promise = new Promise((resolve, reject) => {
-        request.post(options, (error, response, body) => {
-            if (error) {
-                return reject(error);
-            }
-            let jsonResponse = JSON.stringify(JSON.parse(body), null, '  ');
-            resolve(jsonResponse);
-        });
-    });
-
-    return promise;
+    }).then(response => response.json());
 
 };
 
