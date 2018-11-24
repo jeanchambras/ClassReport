@@ -6750,7 +6750,8 @@ html, body {
   width: 100vw;
   height: 100vh;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  overflow: hidden; }
 
 .fullscreen {
   width: 100%;
@@ -6760,8 +6761,12 @@ html, body {
   position: absolute;
   top: 0;
   right: 0;
-  width: 20vw;
-  height: 100%; }
+  width: 300px;
+  height: 100%;
+  transform: translateX(300px);
+  transition: all .9s ease-out; }
+  .right.active {
+    transform: translateX(0); }
 
 .bg-opacity {
   background-color: rgba(0, 0, 0, 0.5); }
@@ -6784,3 +6789,31 @@ html, body {
 .is-spaced-down {
   margin-bottom: 20px;
   margin-top: 20px; }
+
+.fullscreen-overlay-center {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; }
+
+.emoji {
+  transform: scale(0);
+  transition: all 0.7s cubic-bezier(0.17, -0.4, 0.89, 0.4); }
+  .emoji.active {
+    transform: scale(1);
+    transition: all 0.7s cubic-bezier(0.87, 0.4, 0.19, 2.14); }
+
+video {
+  position: absolute;
+  z-index: 0;
+  background-size: 100% 100%;
+  top: 0px;
+  left: 0px;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover; }
