@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 
-import getImageInfos from '../../api';
+import { processHands, processHeads } from '../../api';
 
 import VideoFeed from '../../components/VideoFeed';
 
 class DashboardScreen extends Component {
 
     onGotPicture = (blob) => {
-        getImageInfos(blob).then(console.log).catch(console.error);
+        processHeads(blob).then(console.log).catch(console.error);
     }
 
     render() {
         return (
             <div className="fullscreen">
                 <p>This is the dashboard</p>
-                <VideoFeed onGotPicture={this.onGotPicture} pictureInterval={3000} />
+                <VideoFeed onGotPicture={this.onGotPicture} pictureInterval={1500} />
             </div>
         );
     }
