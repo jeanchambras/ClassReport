@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { processHands, processHeads } from '../../api';
+import DashBar from "../../components/DashBar"
 
 import VideoFeed from '../../components/VideoFeed';
 
@@ -13,8 +14,8 @@ class DashboardScreen extends Component {
     render() {
         return (
             <div className="fullscreen">
-                <p>This is the dashboard</p>
                 <VideoFeed onGotPicture={this.onGotPicture} pictureInterval={1500} />
+                <DashBar peopleCount={400} raisingHand={18}/>
             </div>
         );
     }
