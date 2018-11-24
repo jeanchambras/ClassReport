@@ -7,7 +7,7 @@ import VideoFeed from '../../components/VideoFeed';
 class DashboardScreen extends Component {
 
     onGotPicture = (blob) => {
-        getHeads(blob).then(console.log);
+        getHeads(blob).then(console.log).catch(console.error);
     }
 
     render() {
