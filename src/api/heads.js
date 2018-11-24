@@ -1,20 +1,6 @@
-'use strict';
+import request from 'request';
+import keys from './keys';
 
-const request = require('request');
-const key = require('./keys');
-// Replace <Subscription Key> with your valid subscription key.
-const subscriptionKey = key;
-console.log(key);
-
-// You must use the same location in your REST call as you used to get your
-// subscription keys. For example, if you got your subscription keys from
-// westus, replace "westcentralus" in the URL below with "westus".
-const uriBase = 'https://northeurope.api.cognitive.microsoft.com/face/v1.0/detect';
-
-const imageUrl =
-    'https://upload.wikimedia.org/wikipedia/commons/3/37/Dagestani_man_and_woman.jpg';
-
-// Request parameters.
 const params = {
     'returnFaceId': 'true',
     'returnFaceLandmarks': 'false',
@@ -22,38 +8,32 @@ const params = {
         'emotion,hair,makeup,occlusion,accessories,blur,exposure,noise'
 };
 
+const getHeads = (image) => {
+    
+    console.log(image);
 
-// get Head counts from input image
+    const options = {
+        uri: 'https://northeurope.api.cognitive.microsoft.com/face/v1.0/detect',
+        qs: params,
+        data: image,
+        headers: {
+            'Content-Type': 'application/octet-stream',
+            'Ocp-Apim-Subscription-Key': keys.azure
+        }
+    };
 
-module.exports.getHeads = (image) => {
-
-  // Set options for api request
-  const options = {
-      uri: uriBase,
-      qs: params,
-      body: image,
-      headers: {
-          'Content-Type': 'application/octet-stream',
-          'Ocp-Apim-Subscription-Key' : subscriptionKey
-      }
-  };
-
-  // Post image to Microsoft Azure
-
-const promise = new Promise((resolve, reject) => {
-  request.post(options, (error, response, body) => {
-      if (error) {
-        console.log('Error: ', error);
-        return;
-      }
-
-      let jsonResponse = JSON.stringify(JSON.parse(body), null, '  ');
-      console.log('Response: \n');
-      console.log(jsonResponse);
-      resolve(jsonResponse.length);
+    const promise = new Promise((resolve, reject) => {
+        request.post(options, (error, response, body) => {
+            if (error) {
+                return reject(error);
+            }
+            let jsonResponse = JSON.stringify(JSON.parse(body), null, '  ');
+            resolve(jsonResponse);
+        });
     });
-});
 
-  return promise;
+    return promise;
 
 };
+
+export default getHeads;
