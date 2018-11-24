@@ -11,8 +11,16 @@ class MainScreen extends Component {
 
     start = () => {
         this.setState({
-            started: true
+            started: true,
+            startTime: Date.now()
         });
+    }
+
+    stop = () => {
+        this.setState({
+            started: false,
+            endTime: Date.now()
+        })
     }
 
     onGotNewData = (data) => {
@@ -20,7 +28,10 @@ class MainScreen extends Component {
         this.setState({
             recordedData: [
                 ...currentData,
-                data
+                {
+                    time: Date.now(),
+                    data
+                }
             ]
         });
     }
@@ -33,7 +44,8 @@ class MainScreen extends Component {
             />
         :    
             <DashboardScreen
-                onGotNewData={this.onGotNewData}
+                onGotNewData={ this.onGotNewData }
+                onStop={ this.stop }
             />
         );
     }
