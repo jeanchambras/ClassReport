@@ -5,12 +5,23 @@ import DashboardScreen from '../DashboardScreen';
 
 class MainScreen extends Component {
     state = {
-        started: false
+        started: false,
+        recordedData: []
     };
 
     start = () => {
         this.setState({
             started: true
+        });
+    }
+
+    onGotNewData = (data) => {
+        const currentData = this.state.recordedData;
+        this.setState({
+            recordedData: [
+                ...currentData,
+                data
+            ]
         });
     }
 
@@ -22,7 +33,7 @@ class MainScreen extends Component {
             />
         :    
             <DashboardScreen
-
+                onGotNewData={this.onGotNewData}
             />
         );
     }

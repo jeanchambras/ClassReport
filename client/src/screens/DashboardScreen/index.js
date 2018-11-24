@@ -7,7 +7,11 @@ import VideoFeed from '../../components/VideoFeed';
 class DashboardScreen extends Component {
 
     onGotPicture = (blob) => {
-        processHeads(blob).then(console.log).catch(console.error);
+        const { onGotNewData } = this.props;
+        processHeads(blob).then(data => {
+            console.log(data);
+            onGotNewData(data);
+        }).catch(console.error);
     }
 
     render() {
