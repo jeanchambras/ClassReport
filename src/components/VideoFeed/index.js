@@ -38,9 +38,7 @@ class VideoFeed extends Component {
     }
 
     requestStream = () => {
-        navigator.mediaDevices.getUserMedia(constraints)
-            .then(this.onStreamSuccess)
-            .catch(this.onStreamError);
+        getVideo().then(this.onStreamSuccess).catch(this.onStreamError);
     }
 
     /**
