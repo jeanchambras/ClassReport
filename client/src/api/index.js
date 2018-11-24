@@ -2,7 +2,7 @@ import getHeads from './heads';
 import getHands from './hands';
 
 const processHands = (image) => {
-
+  return getHands(image);
 };
 
 const processHeads = (image) => {
