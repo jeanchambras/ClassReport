@@ -11,10 +11,18 @@ class StartScreen extends Component {
     render() {
         const { onStart } = this.props;
         return (
-            <div className={"empty" /* fullscreen flex centered */}>
-                <Button onClick={ onStart }>
-                    Start
-                </Button>
+            <div className={"hero is-fullheight"}>
+                <div className="hero-body has-background-primary ">
+                    <div className="container">
+                        <div className="columns is-full">
+                            <div className="column has-text-centered is-12">
+                                <Button onClick={ onStart }>
+                                    Start
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
