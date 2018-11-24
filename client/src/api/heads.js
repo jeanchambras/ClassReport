@@ -1,5 +1,4 @@
-import request from 'request';
-import keys from './keys';
+import config from './config';
 
 const uri = 'https://northeurope.api.cognitive.microsoft.com/face/v1.0/detect';
 
@@ -13,7 +12,7 @@ const params = {
 const urlParams = Object.entries(params).map(e => e.join('=')).join('&');
 
 const getHeads = (imageBlob) => {
-    
+
     return fetch(`${uri}?${urlParams}`, {
         method: 'POST',
         body: imageBlob,
@@ -21,7 +20,7 @@ const getHeads = (imageBlob) => {
         contentType: false,
         headers: {
             'Content-Type': 'application/octet-stream',
-            'Ocp-Apim-Subscription-Key': keys.azure
+            'Ocp-Apim-Subscription-Key': config.azure
         }
     }).then(response => response.json());
 

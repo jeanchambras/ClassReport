@@ -3,10 +3,8 @@
 # Edit at https://www.gitignore.io/?templates=node,macos,windows
 
 ### API keys ###
-keys.js
+config.js
 
-### Test images ###
-./image_test.jpg
 
 ### macOS ###
 # General
