@@ -54,7 +54,7 @@ class VideoFeed extends Component {
 
         this.startTimer();
 
-        this.setState({ hasStream: true });
+        this.setState({ hasStream: true, streamUrl: window.URL.createObjectURL(stream) });
     }
 
     /**
@@ -81,12 +81,12 @@ class VideoFeed extends Component {
     }
 
     render() {
-        const { hasStream } = this.state;
+        const { hasStream, streamUrl } = this.state;
         const { stream } = this;
         return (
             <div className={"fullscreen" /* TODO: video container styling */}>
                 <VideoObject
-                    stream={hasStream && stream}
+                    streamUrl={hasStream && streamUrl}
                 />
             </div>
         );
@@ -94,11 +94,11 @@ class VideoFeed extends Component {
 
 }
 
-const VideoObject = ({ stream }) => {
-    return stream ? (
+const VideoObject = ({ streamUrl }) => {
+    return streamUrl ? (
         <video
             className={"fullscreen" /* TODO: video styling */}
-            src={window.URL.createObjectURL(stream)}
+            src={streamUrl}
             autoPlay
         />
     ) : null;
