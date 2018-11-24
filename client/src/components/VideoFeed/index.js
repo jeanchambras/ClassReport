@@ -83,7 +83,7 @@ class VideoFeed extends Component {
     render() {
         const { hasStream, streamUrl } = this.state;
         return (
-            <div className={"fullscreen" /* TODO: video container styling */}>
+            <div className={"fullscreen video-container" /* TODO: video container styling */}>
                 <VideoObject
                     streamUrl={hasStream && streamUrl}
                 />

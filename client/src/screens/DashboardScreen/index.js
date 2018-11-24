@@ -41,16 +41,23 @@ class DashboardScreen extends Component {
         .catch(console.error);
     }
 
-    flash = () => {
-
-    }
-
     render() {
+        const { data } = this.state;
         return (
             <div className="fullscreen">
-                <FullscreenEmotion emotion={this.state.emotion} />
-                <VideoFeed ref={ref => this.videoFeed = ref} onGotPicture={this.onGotPicture} pictureDelay={500} />
-                <DashBar peopleCount={400} raisingHand={50} />
+                <FullscreenEmotion
+                    emotion={ this.state.emotion }
+                />
+                <VideoFeed
+                    ref={ref => this.videoFeed = ref}
+                    onGotPicture={this.onGotPicture}
+                    pictureDelay={500}
+                />
+                <DashBar
+                    active={ data.hands ? true : false }
+                    peopleCount={ data.hands && data.hands.skeletonCount }
+                    raisingHand={ data.hands && data.hands.count }
+                />
             </div>
         );
     }
