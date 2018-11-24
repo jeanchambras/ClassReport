@@ -34,6 +34,9 @@ class MainScreen extends Component {
                 }
             ]
         });
+
+        // FIXME: debug
+        console.log(data);
     }
 
     render() {

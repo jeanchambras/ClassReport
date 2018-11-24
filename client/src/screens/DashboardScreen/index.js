@@ -9,16 +9,22 @@ class DashboardScreen extends Component {
 
     onGotPicture = (blob) => {
         const { onGotNewData } = this.props;
-        processHeads(blob).then(data => {
-            console.log(data);
-            onGotNewData(data);
-        }).catch(console.error);
+
+        Promise.all([
+            processHands(blob),
+            processHeads(blob)
+        ])
+        .then(([hands, heads]) => {
+            onGotNewData({ hands, heads });
+            this.videoFeed.startTimer();
+        })
+        .catch(console.error);
     }
 
     render() {
         return (
             <div className="fullscreen">
-                <VideoFeed onGotPicture={this.onGotPicture} pictureInterval={1500} />
+                <VideoFeed ref={ref => this.videoFeed = ref} onGotPicture={this.onGotPicture} pictureDelay={500} />
                 <DashBar peopleCount={400} raisingHand={50}/>
             </div>
         );
