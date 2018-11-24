@@ -1,18 +1,20 @@
 import getHeads from './heads';
 
+const processHands = (image) => {
+  //TODO: call Julien's API
+};
 
-const getImageInfos = (image) => {
-
+const processHeads = (image) => {
 
   return getHeads(image).then((data) => {
 
-    let response = {
-      headsCount: data.length,
-      globalEmotions: {}
+    let heads = {
+      count: data.length,
+      emotions: {}
     };
 
     if (data.length <= 0){
-      return response;
+      return heads;
     } else {
       let emotions = {};
 
@@ -28,22 +30,16 @@ const getImageInfos = (image) => {
       }
 
       for (const emotionName in emotions) {
-        emotions[emotionName] /= response.headsCount;
+        emotions[emotionName] /= heads.count;
       }
 
-      response.globalEmotions = emotions;
+      heads.emotions = emotions;
 
-      return response;
+      return heads;
 
     }
   });
 
+};
 
-}
-
-const getHands = (image) => {
-
-}
-
-
-export default getImageInfos;
+export { processHands, processHeads };
