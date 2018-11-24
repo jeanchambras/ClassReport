@@ -1,7 +1,8 @@
 import getHeads from './heads';
+import getHands from './hands';
 
 const processHands = (image) => {
-  //TODO: call Julien's API
+
 };
 
 const processHeads = (image) => {
