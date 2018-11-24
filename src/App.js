@@ -1,15 +1,4 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import MainScreen from './screens/MainScreen';
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <h1 className="has-text-primary"> This is Class Report</h1>
-      </div>
-    );
-  }
-}
+export default MainScreen;
 
-export default App;
