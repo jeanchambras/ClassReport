@@ -19,7 +19,7 @@ class DashboardScreen extends Component {
         return (
             <div className="fullscreen">
                 <VideoFeed onGotPicture={this.onGotPicture} pictureInterval={1500} />
-                <DashBar peopleCount={400} raisingHand={18}/>
+                <DashBar peopleCount={400} raisingHand={50}/>
             </div>
         );
     }
