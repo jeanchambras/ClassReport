@@ -25,7 +25,7 @@ class DashboardScreen extends Component {
         return (
             <div className="fullscreen">
                 <VideoFeed ref={ref => this.videoFeed = ref} onGotPicture={this.onGotPicture} pictureDelay={500} />
-                <DashBar peopleCount={400} raisingHand={18}/>
+                <DashBar peopleCount={400} raisingHand={50}/>
             </div>
         );
     }
