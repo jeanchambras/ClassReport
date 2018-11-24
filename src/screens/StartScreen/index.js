@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 
-import StartButton from '../../components/StartButton';
+import Button from '../../components/Button';
 
 class StartScreen extends Component {
 
-    render() {
+    start = () => {
 
+    }
+
+    render() {
+        const { onStart } = this.props;
+        return (
+            <div class={"empty" /* fullscreen flex centered */}>
+                <Button onClick={ onStart }>
+                    Start
+                </Button>
+            </div>
+        );
     }
 
 }
