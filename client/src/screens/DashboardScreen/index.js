@@ -18,6 +18,7 @@ class DashboardScreen extends Component {
         return (
             <div className="fullscreen">
                 <p>This is the dashboard</p>
+                { /* TODO: stop button (this.props.onStop) */ }
                 <VideoFeed onGotPicture={this.onGotPicture} pictureInterval={1500} />
             </div>
         );
