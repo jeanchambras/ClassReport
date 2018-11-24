@@ -73,6 +73,7 @@ class VideoFeed extends Component {
     startTimer = () => {
         const { pictureInterval } = this.props;
         if (pictureInterval) {
+            this.takePicture();
             this.timer = setInterval(this.takePicture, pictureInterval);
         }
     }
