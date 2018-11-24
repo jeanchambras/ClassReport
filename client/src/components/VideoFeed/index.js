@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 const supported = 'mediaDevices' in navigator;
+if (!supported)
+    alert(`Your browser doesn't support WebRTC. Please upgrade to a newer version.`);
 
 const constraints = {
     audio: false,
@@ -59,6 +61,7 @@ class VideoFeed extends Component {
      * An error has occurred during request (e.g. user refused)
      */
     onStreamError = (error) => {
+        alert(`An error has occurred while retrieving the video stream.`);
         console.error(error);
     }
 
