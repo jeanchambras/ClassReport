@@ -1,4 +1,3 @@
-import request from 'request';
 import keys from './keys';
 
 const uri = 'https://northeurope.api.cognitive.microsoft.com/face/v1.0/detect';
