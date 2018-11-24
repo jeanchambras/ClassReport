@@ -1,5 +1,5 @@
 # classreport
-_Lauzhack 2018 project_
+_Lauzhack 2018 project, made by Ulysse Ramage, Jean Chambras, Julien Malka and Gaspard Peduzzi_
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ _Lauzhack 2018 project_
 export default {
   // Your endpoint for Microsoft Azure
   faceUri: "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect",
-  // Your subscriptions key for tbhis service
+  // Your subscriptions key for this service
   faceKey: "xxxxxxxxxxxxxxxxxxxxxxx",
   // The endpoint of your python server used for handraising recognition
   handUri: "http://xxx.xxx.xxx.xxx:5000/hand-raised"
