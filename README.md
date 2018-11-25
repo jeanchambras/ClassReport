@@ -32,8 +32,8 @@ Start the __server__ project with:
 ```sh
 cd server
 ./getModels.sh
-pip install -r requirements.txt
-python server.py
+pip3 install -r requirements.txt
+python3 server.py
 ```
 
 Start the __application__ project in an other window with:
