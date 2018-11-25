@@ -61,4 +61,4 @@ For the latter, we've been using OpenPose to compute a pose estimation of the st
 
 <center><img src="https://i.imgur.com/jW90QXM.png"></center>
 
-<center><img src="https://media.giphy.com/media/dZCK9jEYxPxIxUrqYb/giphy.gif"></center>
+<center><img src="https://thumbs.gfycat.com/DazzlingDisguisedEnglishsetter-size_restricted.gif"></center>
