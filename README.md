@@ -8,7 +8,7 @@ _Lauzhack 2018 project, made by Ulysse Ramage, Jean Chambras, Julien Malka and G
 
 ## Installation
 
-### Dependencies
+### Dependencies :gear:
 *  In order to be able to run the project you need `python v3.5` and `node v10` with `npm` and `pip3`
 * You need to create a `config.js` file at the following path `client/src/api/config.js` with this content :
 
@@ -25,7 +25,7 @@ export default {
 
 
 
-### Launch the project
+### Launch the project :rocket:
 
 Start the __server__ project with:
 
@@ -46,7 +46,7 @@ npm run start
 
 
 
-## Motivations
+## Motivations :mortar_board:
 The goal was to create a very **intuitive dashboard** in the time available where a speaker (teacher, speaker, etc.) could understand and be informed of the **audience's interactions**. They are categorized into two categories:
 - **The hands raised**, allowing to directly conduct polls with this interaction, or to note the participation of people in relation to the timeline of the session
-- **People's expressions**, analyzing the following feelings in all people at every moment of the experience: _anger, contempt, disgust, fear, happiness, neutral, sadness, surprise_
+- **People's expressions**, analyzing the following feelings in all people at every moment of the experience: _anger, contempt, disgust, fear, happiness, neutral, sadness, surprise_ :relieved: :neutral_face: :worried:
