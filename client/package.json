@@ -6,11 +6,7 @@
     "chart.js": "^2.7.3",
     "image-capture": "^0.4.0",
     "react": "^16.6.3",
-<<<<<<< HEAD
-    "react-chartjs-2": "^2.7.4",
-=======
     "react-chartkick": "^0.3.0",
->>>>>>> 38f70091e37ec90f1f65c8ea38b913482742c6b9
     "react-dom": "^16.6.3",
     "react-facebook-emoji": "^1.0.11",
     "react-scripts": "2.1.1",
