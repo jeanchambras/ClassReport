@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 const RaisingHands = ({ raisingHand, peopleCount }) => (raisingHand >= 1) && (
     <div className="columns is-multiline">
-        <div className="column is-full  has-text-centered emoji height-one-third">
+        <div className="column is-full  has-text-centered hand-emoji height-one-third">
             <span className="is-size-big is-spaced-down"> 🤚 </span>
         </div>
         <div className="column is-full has-text-centered height-one-third">
