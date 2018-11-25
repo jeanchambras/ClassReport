@@ -8,7 +8,6 @@ CORS(app)
 
 @app.route('/hand-raised', methods=['POST'])
 def hand_raised():
-    lol = request
     file = request.files["file"]
     file.save(os.path.join("uploaded.jpg"))
     ret, people, points = nb_raised()
