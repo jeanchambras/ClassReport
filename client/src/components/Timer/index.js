@@ -47,7 +47,7 @@ class Timer extends Component {
     return(
         <div className="columns has-text-centered">
             <div className="column align-center">
-                <button onClick={this.stopTimer} className="button is-danger is-rounded">stop</button>
+                <button onClick={this.props.onStop} className="button is-danger is-rounded">stop</button>
             </div>
             <div className="column align-center">
                 <h3 className="is-size-2 has-text-white">{this.convertMS(this.state.time)}</h3>

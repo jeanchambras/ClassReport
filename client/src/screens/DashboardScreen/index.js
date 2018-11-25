@@ -65,7 +65,7 @@ class DashboardScreen extends Component {
         return (
             <div className="main">
                 <div className="container left">
-                    <Timer />
+                    <Timer onStop={ this.props.onStop } />
                 </div>
                 <FullscreenEmotion
                     emotion={ this.state.emotion }
