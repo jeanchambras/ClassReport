@@ -5,8 +5,9 @@ import math
 from random import randint
 
 def nb_raised():
-
+    time1 = time.time()
     image1 = cv2.imread("uploaded.jpg")
+    image1 = cv2.resize(image1, (0, 0), fx=0.5, fy=0.5)
 
     protoFile = "pose/coco/pose_deploy_linevec.prototxt"
     weightsFile = "pose/coco/pose_iter_440000.caffemodel"
@@ -31,7 +32,7 @@ def nb_raised():
              [0,0,255], [255,0,0], [200,200,0], [255,0,0], [200,200,0], [0,0,0]]
 
 
-    def getKeypoints(probMap, threshold=0.2):
+    def getKeypoints(probMap, threshold=0.1):
 
         mapSmooth = cv2.GaussianBlur(probMap,(3,3),0,0)
 
@@ -200,7 +201,6 @@ def nb_raised():
 
 
 
-    frameClone = image1.copy()
     # for i in range(nPoints):
     #     for j in range(len(detected_keypoints[i])):
     #         cv2.circle(frameClone, detected_keypoints[i][j][0:2], 5, colors[i], -1, cv2.LINE_AA)
@@ -209,13 +209,13 @@ def nb_raised():
     valid_pairs, invalid_pairs = getValidPairs(output)
     personwiseKeypoints = getPersonwiseKeypoints(valid_pairs, invalid_pairs)
     nb_people = len(personwiseKeypoints)
-    for i in [0, 2, 3]:
-        for n in range(len(personwiseKeypoints)):
-            index = personwiseKeypoints[n][np.array(POSE_PAIRS[i])]
-            if -1 in index:
-                continue
-            B = np.int32(keypoints_list[index.astype(int), 0])
-            A = np.int32(keypoints_list[index.astype(int), 1])
+    # for i in [0, 2, 3]:
+    #     for n in range(len(personwiseKeypoints)):
+    #         index = personwiseKeypoints[n][np.array(POSE_PAIRS[i])]
+    #         if -1 in index:
+    #             continue
+    #         B = np.int32(keypoints_list[index.astype(int), 0])
+    #         A = np.int32(keypoints_list[index.astype(int), 1])
             #cv2.line(frameClone, (B[0], A[0]), (B[1], A[1]), colors[i], 3, cv2.LINE_AA)
 
 
@@ -223,49 +223,56 @@ def nb_raised():
     points = []
     for n in range(len(personwiseKeypoints)):
         neck_rs = personwiseKeypoints[n][np.array(POSE_PAIRS[0])]
-        neck = np.int32(keypoints_list[neck_rs.astype(int), 0])
-        shoulder = np.int32(keypoints_list[neck_rs.astype(int), 1])
+        X = np.int32(keypoints_list[neck_rs.astype(int), 0])
+        Y = np.int32(keypoints_list[neck_rs.astype(int), 1])
+        neck_x, neck_y, shoulder_x, shoulder_y = X[0], Y[0], X[1], Y[1]
         rs_re = personwiseKeypoints[n][np.array(POSE_PAIRS[2])]
+        X = np.int32(keypoints_list[rs_re.astype(int), 0])
+        Y = np.int32(keypoints_list[rs_re.astype(int), 1])
+        elbow_x, elbow_y = X[1], Y[1]
         el_wr = personwiseKeypoints[n][np.array(POSE_PAIRS[3])]
-        elbow = np.int32(keypoints_list[rs_re.astype(int), 0])
-        lol = np.int32(keypoints_list[rs_re.astype(int), 1])
         X = np.int32(keypoints_list[el_wr.astype(int), 0])
         Y = np.int32(keypoints_list[el_wr.astype(int), 1])
-        if -1 in neck_rs or -1 in rs_re or -1 in lol:
+        wrist_x, wrist_y = X[1], Y[1]
+        if -1 in neck_rs or -1 in rs_re or -1 in el_wr:
             continue
 
-        a = np.array([neck[0], -shoulder[0]])
-        b = np.array([neck[1], -shoulder[1]])
-        #cv2.circle(frameClone, (neck[1], shoulder[1]), 10, colors[5], -1, cv2.LINE_AA)
-        c = np.array([elbow[1], -lol[1]])
-        ba = a - b
-        bc = c - b
-        ang1 = np.arctan2(*ba[::-1])
-        ang2 = np.arctan2(*bc[::-1])
-
-        angle = np.rad2deg((ang1 - ang2))
-        if angle > 90:
-            angle = angle - 180
-        if angle < -90:
-            angle = angle + 180
-        verti = np.array([0, -10])
-        a = np.array([X[0], -Y[0]])
-        b = np.array([X[1], -Y[1]])
-        ba = a - b
-        ang1 = np.arctan2(*ba[::-1])
-        ang2 = np.arctan2(*verti[::-1])
-        angle_v = np.rad2deg((ang1 - ang2))
-        if angle_v > 90:
-            angle_v = angle_v - 180
-        if angle_v < (-90):
-            angle_v = angle_v + 180
-        print("ANGLE VERTI : "+str(angle_v))
-
-
-        print("ANGLE " + str(n) + " : " + str(angle))
-        if abs(angle_v)<30 and angle>-30:
+        # a = np.array([neck[0], -shoulder[0]])
+        #         # b = np.array([neck[1], -shoulder[1]])
+        #         # #cv2.circle(frameClone, (neck[1], shoulder[1]), 10, colors[5], -1, cv2.LINE_AA)
+        #         # c = np.array([elbow[1], -lol[1]])
+        #         # ba = a - b
+        #         # bc = c - b
+        #         # ang1 = np.arctan2(*ba[::-1])
+        #         # ang2 = np.arctan2(*bc[::-1])
+        #         #
+        #         # angle = np.rad2deg((ang1 - ang2))
+        #         # if angle > 90:
+        #         #     angle = angle - 180
+        #         # if angle < -90:
+        #         #     angle = angle + 180
+        #         # verti = np.array([0, -10])
+        #         # a = np.array([X[0], -Y[0]])
+        #         # b = np.array([X[1], -Y[1]])
+        #         # ba = a - b
+        #         # ang1 = np.arctan2(*ba[::-1])
+        #         # ang2 = np.arctan2(*verti[::-1])
+        #         # angle_v = np.rad2deg((ang1 - ang2))
+        #         # if angle_v > 90:
+        #         #     angle_v = angle_v - 180
+        #         # if angle_v < (-90):
+        #         #     angle_v = angle_v + 180
+        #         # print("ANGLE VERTI : "+str(angle_v))
+        #         #
+        #         #
+        #         # print("ANGLE " + str(n) + " : " + str(angle))
+        #         # if abs(angle_v)<30 and angle>-30:
+        #         #     count += 1
+        #         #     points.append([X[1]/frameWidth, Y[1]/frameHeight])
+        if wrist_y<shoulder_y:
             count += 1
-            points.append([X[1]/frameWidth, Y[1]/frameHeight])
+            points.append([wrist_x/frameWidth, wrist_y/frameHeight])
+
 
 
 
@@ -286,7 +293,8 @@ def nb_raised():
     print("count = " + str(count))
     #cv2.imshow("Detected Pose" , frameClone)
     #cv2.waitKey(0)
-
+    time2 = time.time()
+    print(time2-time1)
     return count, nb_people, points
 
 
