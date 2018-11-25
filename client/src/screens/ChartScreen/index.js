@@ -30,7 +30,7 @@ const computeTotalEmotions = (data) => {
         const currentData = data[i];
         const emotions = currentData.data.heads.emotions;
         for (const emotionName in emotions) {
-            if (emotions[emotionName] > 0) {
+            if (emotionName !== 'neutral' && emotions[emotionName] > 0) {
                 if (!emotionValues[emotionName]) {
                     emotionValues[emotionName] = 0;
                 }
