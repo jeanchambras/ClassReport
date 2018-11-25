@@ -32,6 +32,7 @@ class VideoFeed extends Component {
         hasStream: false
     };
 
+    stream = null;
     captureDevice = null;
     timer = null;
 
@@ -83,6 +84,11 @@ class VideoFeed extends Component {
         if (pictureDelay) {
             this.timer = setTimeout(this.takePicture, pictureDelay);
         }
+    }
+
+    componentWillUnmount() {
+        this.stream.getTracks().forEach(track => track.stop());
+        clearInterval(this.timer);
     }
 
     render() {
