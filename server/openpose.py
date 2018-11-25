@@ -203,24 +203,10 @@ def nb_raised():
         detected_keypoints.append(keypoints_with_id)
 
     frameClone = image1.copy()
-    # for i in range(nPoints):
-    #     for j in range(len(detected_keypoints[i])):
-    #         cv2.circle(frameClone, detected_keypoints[i][j][0:2], 5, colors[i], -1, cv2.LINE_AA)
-    # cv2.imshow("Keypoints",frameClone)
 
     valid_pairs, invalid_pairs = getValidPairs(output)
     personwiseKeypoints = getPersonwiseKeypoints(valid_pairs, invalid_pairs)
     nb_people = len(personwiseKeypoints)
-    for i in [0, 1, 2, 3, 4, 5]:
-        for n in range(len(personwiseKeypoints)):
-            index = personwiseKeypoints[n][np.array(POSE_PAIRS[i])]
-            if -1 in index:
-                continue
-            B = np.int32(keypoints_list[index.astype(int), 0])
-            A = np.int32(keypoints_list[index.astype(int), 1])
-            cv2.line(frameClone, (B[0], A[0]), (B[1], A[1]), colors[i], 3, cv2.LINE_AA)
-
-    print(len(personwiseKeypoints))
     count = 0
     points = []
     for n in range(len(personwiseKeypoints)):
@@ -257,65 +243,13 @@ def nb_raised():
             if wrist_yl < shoulder_yl or wrist_yl < neck_yl:
                 add = True
 
-
-
-        # a = np.array([neck[0], -shoulder[0]])
-        #         # b = np.array([neck[1], -shoulder[1]])
-        #         # #cv2.circle(frameClone, (neck[1], shoulder[1]), 10, colors[5], -1, cv2.LINE_AA)
-        #         # c = np.array([elbow[1], -lol[1]])
-        #         # ba = a - b
-        #         # bc = c - b
-        #         # ang1 = np.arctan2(*ba[::-1])
-        #         # ang2 = np.arctan2(*bc[::-1])
-        #         #
-        #         # angle = np.rad2deg((ang1 - ang2))
-        #         # if angle > 90:
-        #         #     angle = angle - 180
-        #         # if angle < -90:
-        #         #     angle = angle + 180
-        #         # verti = np.array([0, -10])
-        #         # a = np.array([X[0], -Y[0]])
-        #         # b = np.array([X[1], -Y[1]])
-        #         # ba = a - b
-        #         # ang1 = np.arctan2(*ba[::-1])
-        #         # ang2 = np.arctan2(*verti[::-1])
-        #         # angle_v = np.rad2deg((ang1 - ang2))
-        #         # if angle_v > 90:
-        #         #     angle_v = angle_v - 180
-        #         # if angle_v < (-90):
-        #         #     angle_v = angle_v + 180
-        #         # print("ANGLE VERTI : "+str(angle_v))
-        #         #
-        #         #
-        #         # print("ANGLE " + str(n) + " : " + str(angle))
-        #         # if abs(angle_v)<30 and angle>-30:
-        #         #     count += 1
-        #         #     points.append([X[1]/frameWidth, Y[1]/frameHeight])
-        #cv2.circle(frameClone, (wrist_xl, wrist_yl), 10, colors[5], -1, cv2.LINE_AA)
-        if add==True:
+        if add:
             count += 1
             points.append([])
 
 
 
-
-
-
-
-
-
-    # for i in range(17):
-    #     for n in range(len(personwiseKeypoints)):
-    #         index = personwiseKeypoints[n][np.array(POSE_PAIRS[i])]
-    #         if -1 in index:
-    #             continue
-    #         B = np.int32(keypoints_list[index.astype(int), 0])
-    #         A = np.int32(keypoints_list[index.astype(int), 1])
-    #         cv2.line(frameClone, (B[0], A[0]), (B[1], A[1]), colors[i], 3, cv2.LINE_AA)
-
     print("count = " + str(count))
-    #cv2.imshow("Detected Pose" , frameClone)
-    #cv2.waitKey(0)
     time2 = time.time()
     print(time2-time1)
     return count, nb_people, points
