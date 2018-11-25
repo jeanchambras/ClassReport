@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import RaisingHands from "../People"
+
+import RaisingHands from '../RaisingHands';
+
 class DashBar extends Component {
 
     render() {
