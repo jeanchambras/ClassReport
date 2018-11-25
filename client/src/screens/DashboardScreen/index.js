@@ -21,7 +21,8 @@ class DashboardScreen extends Component {
 
   state = {
     heads: {},
-    hands:{}
+    hands: {},
+    loaded: false
   };
 
   canvas = null;
@@ -63,7 +64,8 @@ class DashboardScreen extends Component {
           console.log(heads); //testheads
           this.setState({
             heads: heads,
-            emotion: getMaxEmotion(heads.emotions)
+            emotion: getMaxEmotion(heads.emotions),
+            loaded: true
           })
         }).catch(console.error);
 
@@ -82,7 +84,8 @@ class DashboardScreen extends Component {
         .then( (hands)=>{
           console.log(hands); //testheads
           this.setState({
-            hands: hands
+            hands: hands,
+            loaded: true
           })
         }).catch(console.error);
       }else{
@@ -104,7 +107,7 @@ componentWillUnmount() {
 
 
 render() {
-  const { heads, hands } = this.state;
+  const { heads, hands, loaded } = this.state;
   return (
     <div className="main">
     <div className="container left">
@@ -119,7 +122,7 @@ render() {
     pictureDelay={500}
     />
     <DashBar
-    active={ hands ? true : false }
+    active={ loaded }
     peopleCount={ heads && heads.count}
     raisingHand={ hands && hands.count }
     />
