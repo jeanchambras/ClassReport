@@ -9,13 +9,11 @@ ReactChartkick.addAdapter(Chart);
         {
             time: ...,
             data: {
-                heads: {
                     count,
                     emotions: {
                         anger: 0.55,
                         ...
                     }
-                }
             }
         },
         {
@@ -28,7 +26,7 @@ const computeTotalEmotions = (data) => {
     let emotionValues = {};
     for (const i in data) {
         const currentData = data[i];
-        const emotions = currentData.data.heads.emotions;
+        const emotions = currentData.data.emotions;
         for (const emotionName in emotions) {
             if (emotionName !== 'neutral' && emotions[emotionName] > 0) {
                 if (!emotionValues[emotionName]) {
@@ -44,12 +42,13 @@ const computeTotalEmotions = (data) => {
 class ChartScreen extends Component {
 	render() {
         const data = this.props.data;
+        console.log(data)
 		return (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
                 <h1><b>Session results</b></h1>
                 <div style={{ width: 800 }}>
                     { /* <h2>First Chart</h2> */ }
-                    <LineChart data={data.map(v => [v.time, v.data.heads.count])} xtitle="Time" ytitle="Attentive students" />
+                    <LineChart data={data.map(v => [v.time, v.data.count])} xtitle="Time" ytitle="Attentive students" />
                 </div>
                 <div style={{ width: 800 }}>
                     { /* <h2>Second Chart</h2> */ }

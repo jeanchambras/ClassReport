@@ -48,12 +48,16 @@ class DashboardScreen extends Component {
     });
   }
 
+  handsTimer = null;
+  headsTimer = null;
+
   componentDidMount(){
     const { onGotNewData } = this.props;
 
     const repeatHeads = () => {
+      if (this.STOP) return;
       if(this.blob){
-        processHeads(this.blob).then(setTimeout(repeatHeads, 1000))
+        processHeads(this.blob).then(heads => { this.headsTimer = setTimeout(repeatHeads, 1000); return heads; })
         .then( (heads)=>{
           onGotNewData(heads);
           console.log(heads); //testheads
@@ -64,15 +68,16 @@ class DashboardScreen extends Component {
         }).catch(console.error);
 
       }else{
-        setTimeout(repeatHeads, 1000);
+        this.headsTimer = setTimeout(repeatHeads, 1000);
       }
     }
-    setTimeout(repeatHeads, 1000);
+    this.headsTimer = setTimeout(repeatHeads, 1000);
 
 
     const repeatHands = () =>  {
+      if (this.STOP) return;
       if(this.blob){
-        processHands(this.blob).then(setTimeout(repeatHands, 1000))
+        processHands(this.blob).then(hands => { this.handsTimer = setTimeout(repeatHands, 1000); return hands; })
 
         .then( (hands)=>{
           console.log(hands); //testheads
@@ -81,15 +86,19 @@ class DashboardScreen extends Component {
           })
         }).catch(console.error);
       }else{
-        setTimeout(repeatHands, 1000);
+        this.handsTimer = setTimeout(repeatHands, 1000);
       }
     }
-    setTimeout(repeatHands, 1000);
+    this.handsTimer = setTimeout(repeatHands, 1000);
 
   }
 
 
-
+componentWillUnmount() {
+  clearInterval(this.headsTimer)
+  clearInterval(this.handsTimer)
+  this.STOP = true
+}
 
 
 
@@ -99,7 +108,7 @@ render() {
   return (
     <div className="main">
     <div className="container left">
-    <Timer />
+    <Timer onStop={this.props.onStop}/>
     </div>
     <FullscreenEmotion
     emotion={ this.state.emotion }
