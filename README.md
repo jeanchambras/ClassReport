@@ -9,7 +9,7 @@ _Lauzhack 2018 project, made by Ulysse Ramage, Jean Chambras, Julien Malka and G
 ## Installation
 
 ### Dependencies
-*  In order to be able to run the project you need `python v3.5` and `node v10` with `yarn` and `pip`
+*  In order to be able to run the project you need `python v3.5` and `node v10` with `npm` and `pip3`
 * You need to create a `config.js` file at the following path `client/src/api/config.js` with this content :
 
 ```
@@ -40,8 +40,8 @@ Start the __application__ project in an other window with:
 
 ```sh
 cd client
-yarn
-yarn start
+npm install
+npm run start
 ```
 
 
