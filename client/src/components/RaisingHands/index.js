@@ -10,7 +10,7 @@ const RaisingHands = ({ raisingHand, peopleCount }) => (raisingHand >= 1) && (
                 {raisingHand}
             </h2>
             <h3 className="is-size-3 offset-up ">
-                {Math.round(raisingHand/peopleCount * 100)}%
+                { (peopleCount > 0) ? `${Math.round(raisingHand/peopleCount * 100)}%` : '' }
             </h3>
         </div>
     </div>
