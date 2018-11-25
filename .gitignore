@@ -5,6 +5,8 @@
 ### API keys ###
 config.js
 keys.js
+pose_iter_440000.caffemodel
+uploaded.jpg
 
 
 ### macOS ###
