@@ -2,11 +2,13 @@
 # Created by https://www.gitignore.io/api/node,macos,windows
 # Edit at https://www.gitignore.io/?templates=node,macos,windows
 
-### API keys ###
+### API keys and others ###
 config.js
 keys.js
 pose_iter_440000.caffemodel
 uploaded.jpg
+__pycache__/
+
 
 
 ### macOS ###
