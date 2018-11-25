@@ -17,23 +17,27 @@ const getMaxEmotion = (emotions) => {
 }
 
 class DashboardScreen extends Component {
+
     state = {
         data: {}
     };
+    
+    canvas = null;
 
     onGotPicture = (imageBitmap) => {
         const { onGotNewData } = this.props;
 
         return new Promise(res => {
-            const canvas = document.createElement('canvas');
-            canvas.width = imageBitmap.width;
-            canvas.height = imageBitmap.height;
-            let ctx = canvas.getContext('bitmaprenderer');
-            if (ctx) {
-              ctx.transferFromImageBitmap(imageBitmap);
-            } else {
-              canvas.getContext('2d').drawImage(imageBitmap, 0, 0);
+            if (!this.canvas) {
+                this.canvas = document.createElement('canvas');
             }
+            const canvas = this.canvas;
+            let w = imageBitmap.width;
+		    let h = imageBitmap.height;
+            canvas.width = w;
+            canvas.height = h;
+            let ctx = canvas.getContext("2d");
+            ctx.drawImage(imageBitmap, 0, 0);
             canvas.toBlob(res, 'image/jpeg');
         })
         .then(blob => {
