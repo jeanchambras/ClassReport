@@ -77,7 +77,7 @@ class DashboardScreen extends Component {
     const repeatHands = () =>  {
       if (this.STOP) return;
       if(this.blob){
-        processHands(this.blob).then(hands => { this.handsTimer = setTimeout(repeatHands, 1000); return hands; })
+        processHands(this.blob).then(hands => { this.handsTimer = setTimeout(repeatHands, 900); return hands; })
 
         .then( (hands)=>{
           console.log(hands); //testheads
@@ -86,10 +86,10 @@ class DashboardScreen extends Component {
           })
         }).catch(console.error);
       }else{
-        this.handsTimer = setTimeout(repeatHands, 1000);
+        this.handsTimer = setTimeout(repeatHands, 900);
       }
     }
-    this.handsTimer = setTimeout(repeatHands, 1000);
+    this.handsTimer = setTimeout(repeatHands, 900);
 
   }
 
