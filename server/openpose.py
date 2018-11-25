@@ -20,6 +20,10 @@ def nb_raised():
                   [1,0], [0,14], [14,16], [0,15], [15,17],
                   [2,17], [5,16] ]
 
+
+
+
+
     # index of pafs correspoding to the POSE_PAIRS
     # e.g for POSE_PAIR(1,2), the PAFs are located at indices (31,32) of output, Similarly, (1,5) -> (39,40) and so on.
     mapIdx = [[31,32], [39,40], [33,34], [35,36], [41,42], [43,44],
@@ -207,7 +211,7 @@ def nb_raised():
     valid_pairs, invalid_pairs = getValidPairs(output)
     personwiseKeypoints = getPersonwiseKeypoints(valid_pairs, invalid_pairs)
     nb_people = len(personwiseKeypoints)
-    for i in [0, 2, 3]:
+    for i in [0, 1, 2, 3, 4, 5]:
         for n in range(len(personwiseKeypoints)):
             index = personwiseKeypoints[n][np.array(POSE_PAIRS[i])]
             if -1 in index:
@@ -216,7 +220,7 @@ def nb_raised():
             A = np.int32(keypoints_list[index.astype(int), 1])
             cv2.line(frameClone, (B[0], A[0]), (B[1], A[1]), colors[i], 3, cv2.LINE_AA)
 
-
+    print(len(personwiseKeypoints))
     count = 0
     points = []
     for n in range(len(personwiseKeypoints)):
@@ -232,8 +236,28 @@ def nb_raised():
         X = np.int32(keypoints_list[el_wr.astype(int), 0])
         Y = np.int32(keypoints_list[el_wr.astype(int), 1])
         wrist_x, wrist_y = X[1], Y[1]
-        if -1 in neck_rs or -1 in rs_re or -1 in el_wr:
-            continue
+
+        neck_rsl = personwiseKeypoints[n][np.array(POSE_PAIRS[1])]
+        X = np.int32(keypoints_list[neck_rsl.astype(int), 0])
+        Y = np.int32(keypoints_list[neck_rsl.astype(int), 1])
+        neck_xl, neck_yl, shoulder_xl, shoulder_yl = X[0], Y[0], X[1], Y[1]
+        rs_rel = personwiseKeypoints[n][np.array(POSE_PAIRS[4])]
+        X = np.int32(keypoints_list[rs_rel.astype(int), 0])
+        Y = np.int32(keypoints_list[rs_rel.astype(int), 1])
+        elbow_xl, elbow_yl = X[1], Y[1]
+        el_wrl = personwiseKeypoints[n][np.array(POSE_PAIRS[5])]
+        X = np.int32(keypoints_list[el_wrl.astype(int), 0])
+        Y = np.int32(keypoints_list[el_wrl.astype(int), 1])
+        wrist_xl, wrist_yl = X[1], Y[1]
+        add = False
+        if -1 not in el_wr and -1 not in neck_rs:
+            if wrist_y < shoulder_y or wrist_y < neck_y:
+                add = True
+        if -1 not in el_wrl and -1 not in neck_rsl:
+            if wrist_yl < shoulder_yl or wrist_yl < neck_yl:
+                add = True
+
+
 
         # a = np.array([neck[0], -shoulder[0]])
         #         # b = np.array([neck[1], -shoulder[1]])
@@ -267,10 +291,10 @@ def nb_raised():
         #         # if abs(angle_v)<30 and angle>-30:
         #         #     count += 1
         #         #     points.append([X[1]/frameWidth, Y[1]/frameHeight])
-        cv2.circle(frameClone, (wrist_x, wrist_y), 10, colors[5], -1, cv2.LINE_AA)
-        if wrist_y<shoulder_y or wrist_y<neck_y:
+        #cv2.circle(frameClone, (wrist_xl, wrist_yl), 10, colors[5], -1, cv2.LINE_AA)
+        if add==True:
             count += 1
-            points.append([wrist_x/frameWidth, wrist_y/frameHeight])
+            points.append([])
 
 
 
