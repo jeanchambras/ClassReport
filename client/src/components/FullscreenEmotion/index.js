@@ -3,9 +3,12 @@ import React, { Component } from 'react';
 import FacebookEmoji from 'react-facebook-emoji';
 
 class FullscreenEmotion extends Component {
-    state = {
-        active: false
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            active: props.emotion ? true : false
+        };
+    }
 
     componentDidUpdate(prevProps) {
         if (this.props.emotion !== prevProps.emotion) {
