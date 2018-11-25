@@ -33,10 +33,11 @@ class FullscreenEmotion extends Component {
     render() {
         const { emotion } = this.props;
         const { active } = this.state;
+        const emoji = this.emojiFromEmotion(emotion);
         return (
-            <div className="fullscreen-overlay-center">
+            <div className="fullscreen-overlay-center" style={{ zIndex: 10 }}>
                 <div className={`emoji ${active && 'active'}`}>
-                    { emotion && <FacebookEmoji type="haha" size="xxl" /> }
+                    { emoji && <FacebookEmoji type={emoji} size="xxl" /> }
                 </div>
             </div>
         );
