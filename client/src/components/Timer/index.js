@@ -24,7 +24,7 @@ class Timer extends Component {
     d = Math.floor(h / 24);
     h = h % 24;
     h += d * 24;
-    return h + ':' + m + ':' + s;
+    return ('0' + h).slice(-2) + ':' + ('0' + m).slice(-2) + ':' + ('0' + s).slice(-2);
 }
   startTimer() {
     this.setState({
@@ -47,10 +47,10 @@ class Timer extends Component {
     return(
         <div className="columns has-text-centered">
             <div className="column align-center">
-                <button onClick={this.stopTimer} className="button is-danger is-rounded">stop</button>
+                <button onClick={this.props.onStop} className="button is-danger is-rounded">stop</button>
             </div>
             <div className="column align-center">
-                <h3 className="is-size-1 has-text-white">{this.convertMS(this.state.time)}</h3>
+                <h3 className="is-size-2 has-text-white">{this.convertMS(this.state.time)}</h3>
             </div>
         </div>
     )

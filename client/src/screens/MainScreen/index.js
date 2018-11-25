@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import StartScreen from '../StartScreen';
 import DashboardScreen from '../DashboardScreen';
+import GraphScreen from "../ChartScreen"
 
 class MainScreen extends Component {
     state = {
@@ -40,11 +41,22 @@ class MainScreen extends Component {
     }
 
     render() {
-        const { started } = this.state;
+        const { started, startTime, endTime, recordedData } = this.state;
         return (!started ?
-            <StartScreen
-                onStart={ this.start }
-            />
+            (endTime ?
+                <GraphScreen
+                    startTime={startTime}
+                    endTime={endTime}
+                    data={recordedData}
+                />
+            :
+                <StartScreen
+                    onStart={ this.start }
+                    startTime={startTime}
+                    endTime={endTime}
+                    recordedData={recordedData}
+                />
+            )
         :    
             <DashboardScreen
                 onGotNewData={ this.onGotNewData }
