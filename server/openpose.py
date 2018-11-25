@@ -198,9 +198,7 @@ def nb_raised():
 
         detected_keypoints.append(keypoints_with_id)
 
-
-
-
+    frameClone = image1.copy()
     # for i in range(nPoints):
     #     for j in range(len(detected_keypoints[i])):
     #         cv2.circle(frameClone, detected_keypoints[i][j][0:2], 5, colors[i], -1, cv2.LINE_AA)
@@ -209,14 +207,14 @@ def nb_raised():
     valid_pairs, invalid_pairs = getValidPairs(output)
     personwiseKeypoints = getPersonwiseKeypoints(valid_pairs, invalid_pairs)
     nb_people = len(personwiseKeypoints)
-    # for i in [0, 2, 3]:
-    #     for n in range(len(personwiseKeypoints)):
-    #         index = personwiseKeypoints[n][np.array(POSE_PAIRS[i])]
-    #         if -1 in index:
-    #             continue
-    #         B = np.int32(keypoints_list[index.astype(int), 0])
-    #         A = np.int32(keypoints_list[index.astype(int), 1])
-            #cv2.line(frameClone, (B[0], A[0]), (B[1], A[1]), colors[i], 3, cv2.LINE_AA)
+    for i in [0, 2, 3]:
+        for n in range(len(personwiseKeypoints)):
+            index = personwiseKeypoints[n][np.array(POSE_PAIRS[i])]
+            if -1 in index:
+                continue
+            B = np.int32(keypoints_list[index.astype(int), 0])
+            A = np.int32(keypoints_list[index.astype(int), 1])
+            cv2.line(frameClone, (B[0], A[0]), (B[1], A[1]), colors[i], 3, cv2.LINE_AA)
 
 
     count = 0
@@ -269,7 +267,8 @@ def nb_raised():
         #         # if abs(angle_v)<30 and angle>-30:
         #         #     count += 1
         #         #     points.append([X[1]/frameWidth, Y[1]/frameHeight])
-        if wrist_y<shoulder_y:
+        cv2.circle(frameClone, (wrist_x, wrist_y), 10, colors[5], -1, cv2.LINE_AA)
+        if wrist_y<shoulder_y or wrist_y<neck_y:
             count += 1
             points.append([wrist_x/frameWidth, wrist_y/frameHeight])
 
