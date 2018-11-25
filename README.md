@@ -1,10 +1,11 @@
-# classreport
+# ClassReport
 _Lauzhack 2018 project, made by Ulysse Ramage, Jean Chambras, Julien Malka and Gaspard Peduzzi_
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Motivations](#motivations)
+- [Technical Considerations](#tech)
 
 ## Installation
 
@@ -50,3 +51,12 @@ npm run start
 The goal was to create a very **intuitive dashboard** in the time available where a speaker (teacher, speaker, etc.) could understand and be informed of the **audience's interactions**. They are categorized into two categories:
 - **The hands raised**, allowing to directly conduct polls with this interaction, or to note the participation of people in relation to the timeline of the session
 - **People's expressions**, analyzing the following feelings in all people at every moment of the experience: _anger, contempt, disgust, fear, happiness, neutral, sadness, surprise_ :relieved: :neutral_face: :worried:
+
+## Tech
+
+This project uses state of the art methods in the fields of computer vision and machine learning to be able to identify emotions of the students and raising hand gestures. 
+
+For the latter, we've been using OpenPose to compute a pose estimation of the students in the room and hence know if they're raising their hand.
+
+
+<center><img src="https://i.imgur.com/jW90QXM.png"></center>
