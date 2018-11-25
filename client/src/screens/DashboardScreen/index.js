@@ -21,13 +21,27 @@ class DashboardScreen extends Component {
         data: {}
     };
 
-    onGotPicture = (blob) => {
+    onGotPicture = (imageBitmap) => {
         const { onGotNewData } = this.props;
 
-        Promise.all([
-            processHands(blob),
-            processHeads(blob)
-        ])
+        return new Promise(res => {
+            const canvas = document.createElement('canvas');
+            canvas.width = imageBitmap.width;
+            canvas.height = imageBitmap.height;
+            let ctx = canvas.getContext('bitmaprenderer');
+            if (ctx) {
+              ctx.transferFromImageBitmap(imageBitmap);
+            } else {
+              canvas.getContext('2d').drawImage(imageBitmap, 0, 0);
+            }
+            canvas.toBlob(res, 'image/jpeg');
+        })
+        .then(blob => {
+            return Promise.all([
+                processHands(blob),
+                processHeads(blob)
+            ]);
+        })
         .then(([hands, heads]) => {
             const data = { hands, heads };
             onGotNewData(data);

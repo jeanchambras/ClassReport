@@ -66,7 +66,7 @@ class VideoFeed extends Component {
     }
 
     takePicture = () => {
-        this.captureDevice.takePhoto()
+        this.captureDevice.grabFrame()
         .then(this.props.onGotPicture)
         .catch(err => {
             this.onTakePictureError();
