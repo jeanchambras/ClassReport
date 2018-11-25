@@ -4,8 +4,8 @@ class DashBar extends Component {
 
     render() {
         const { peopleCount, raisingHand, active, children, style } = this.props;
-        return active && (
-            <div className="container right bg-opacity has-text-white">
+        return (
+            <div className={`container right bg-opacity has-text-white ${ active && 'active' }`}>
                     <div className="columns is-multiline">
                         <div className="column is-full is-size-1 has-text-centered is-spaced-down">
                             <p>👨‍🎓 {peopleCount}</p>
