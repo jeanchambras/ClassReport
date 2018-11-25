@@ -22,7 +22,7 @@ class DashboardScreen extends Component {
     state = {
         data: {}
     };
-    
+
     canvas = null;
 
     onGotPicture = (imageBitmap) => {
@@ -77,7 +77,7 @@ class DashboardScreen extends Component {
                 />
                 <DashBar
                     active={ data.hands ? true : false }
-                    peopleCount={ data.hands && data.hands.skeletonCount }
+                    peopleCount={ data.hands && data.heads.count}
                     raisingHand={ data.hands && data.hands.count }
                 />
             </div>
