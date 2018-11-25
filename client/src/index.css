@@ -6833,4 +6833,18 @@ video {
 
 .is-logo {
   height: 400px;
-  width: 400px; }
+  width: 400px;
+  animation: logo 1s ease-in-out infinite alternate; }
+
+@keyframes logo {
+  0% {
+    transform: rotate(1deg) scale(0.98); }
+  50% {
+    transform: rotate(0deg) scale(1.02); }
+  100% {
+    transform: rotate(-1deg) scale(0.98); } }
+
+.button {
+  transition: all .2s; }
+  .button:hover {
+    transform: scale(1.1); }

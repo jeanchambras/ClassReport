@@ -78,9 +78,6 @@ html, body
         transform: scale(1)
         transition: all 0.7s cubic-bezier(.87,.4,.19,2.14)
 
-.video-container
-    
-
 video
     position: absolute
     z-index: 0
@@ -96,3 +93,15 @@ video
 .is-logo
     height: 400px
     width: 400px
+
+    animation: logo 1s ease-in-out infinite alternate;
+
+@keyframes logo
+    0% { transform: rotate(1deg) scale(0.98) }
+    50% { transform: rotate(0deg) scale(1.02) }
+    100% { transform: rotate(-1deg) scale(0.98) }
+
+.button
+    transition: all .2s
+    &:hover
+        transform: scale(1.1)
